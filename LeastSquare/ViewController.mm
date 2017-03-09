@@ -7,8 +7,15 @@
 //
 
 #import "ViewController.h"
-double Em[10][10];
 
+double sum(double * dNumarry,int n);
+double MutilSum(double* dX,double *dY,int n);
+double RelatePow(double *dx,int n,int ex);
+double RelateMutiXY(double *dx,double*dy,int n,int ex);
+void EMatrix(double *dx,double*dy,int n,int ex,double coefficient[]);
+void CalEquation(int exp,double coefficient[] );
+double F(double c[],int l,int m);
+double Em[10][10];
 @interface ViewController ()
 
 @end
@@ -18,14 +25,28 @@ double Em[10][10];
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    int i = pow(2,3);
-    NSLog(@"%zd", i);
     double arry1[9]={1,3,4,5,6,7,8,9,10};
-    printf("sum = %zd", sum(arry1, 3));
+    double arry2[9]={10,5,4,2,1,1,2,3,4};
+    double coefficient[10];
+//    ZeroMemory(coefficient,sizeof(double)*10);
+    
+    //  double dSumarry1= sum(arry1,7);
+    //  printf("darry1=%lf/n",dSumarry1);
+    //
+    //  double dSumarry2=sum(arry2,7);
+    //  printf("darry2=%lf/n",dSumarry2);
+    //
+    //  double dMultiarry1=MutilSum(arry1,arry1,7);
+    //  printf("dMultiarry1=%lf/n",dMultiarry1);
+    
+    //  double dMultiarry12=MutilSum(arry1,arry2,7);
+    //  printf("dMultiarry2=%lf/n",dMultiarry12);//,coefficient[4],coefficient[5]
+    //+ %lfx^3 + %lfx^4
+    EMatrix(arry1,arry2,9,3,coefficient);
+    
+    printf("拟合方程为：y = %lf + %lfx + %lfx^2 /n",coefficient[1],coefficient[2],coefficient[3]);
     
 }
-
-
 
 double sum(double * dNumarry,int n)
 {
@@ -42,85 +63,75 @@ double sum(double * dNumarry,int n)
     return dSum;
 }
 
-- (double)sumWithArr:(NSArray *)arr count:(int)count {
+double MutilSum(double* dX,double *dY,int n)
+{
+    double * dXTemp= new double [n];
+    double * dYTemp= new double [n];
+    double dMultiSum=0;
     
-    if (arr.count < count) {
-        NSLog(@"count 错误");
-    }
-    double sum = 0;
-    for (int i=0;i<count;i++)
-    {
-        NSNumber *num = arr[i];
-        sum+= num.doubleValue;
-    }
-    return sum;
-}
-
-- (double)mutilSumArr1:(NSArray *)arr1 arr2:(NSArray *)arr2 count:(int)count {
+    dXTemp=dX;
+    dYTemp=dY;
     
-    if (arr1.count < count || arr2.count < count) {
-        NSLog(@"count 错误");
-    }
-    double sum = 0;
-    for (int i=0;i<count;i++)
+    for (int i=0;i<n;i++)
     {
-        NSNumber *num1 = arr1[i];
-        NSNumber *num2 = arr2[i];
-        sum+= num1.doubleValue * num2.doubleValue;
-    }
-    return sum;
-}
-
-- (double)RelatePowWithArr:(NSArray *)arr count:(int)count power:(int)power {
-    if (arr.count < count) {
-        NSLog(@"count 错误");
-    }
-    double sum = 0;
-    for (int i=0;i<count;i++)
-    {
-        NSNumber *num = arr[i];
-        sum+= pow(num.doubleValue,power);
-    }
-    return sum;
-}
-
-- (double)RelateMutiArr1:(NSArray *)arr1 arr2:(NSArray *)arr2 count:(int)count power:(int)power {
-    if (arr1.count < count || arr2.count < count) {
-        NSLog(@"count 错误");
+        dMultiSum += dX[i]*dY[i];
     }
     
-    double sum = 0;
-    for (int i=0;i<count;i++)
+    return dMultiSum;
+    
+}
+
+double RelatePow(double *dx,int n,int ex)
+{
+    double * dTemp =new double[n];
+    double ReSum=0;
+    dTemp=dx;
+    for (int j=0;j<n;j++)
     {
-        NSNumber *num1 = arr1[i];
-        NSNumber *num2 = arr2[i];
-        sum+= pow(num1.doubleValue, power) * num2.doubleValue;
+        ReSum+=pow(dTemp[j],ex);
     }
-    return sum;
+    return ReSum;
+}
+
+double RelateMutiXY(double *dx,double*dy,int n,int ex)
+{
+    double * dXTemp= new double [n];
+    double * dYTemp= new double [n];
+    double dReMultiSum=0;
+    
+    dXTemp=dx;
+    dYTemp=dy;
+    
+    for (int i=0;i<n;i++)
+    {
+        dReMultiSum+=pow(dXTemp[i],ex)*dYTemp[i];
+    }
+    return dReMultiSum;
 }
 
 
-////计算方程组的增广矩阵
-//void EMatrix(double *dx,double*dy,int n,int ex,double coefficient[] )
-//{
-//    double * dXTemp= new double [n];
-//    double * dYTemp= new double [n];
-//    dXTemp=dx;
-//    dYTemp=dy;
-//
-//    for(int i=1;i<=ex;i++)
-//    {
-//
-//        for(int j=1;j<=ex;j++)
-//        {
-//            Em[i][j]=RelatePow(dXTemp,n,i+j-2);
-//        }
-//        Em[i][ex+1]=RelateMutiXY(dXTemp,dYTemp,n,i-1);
-//    }
-//    Em[1][1]=n;
-//    CalEquation(ex,coefficient);
-//
-//}
+
+//计算方程组的增广矩阵
+void EMatrix(double *dx,double*dy,int n,int ex,double coefficient[] )
+{
+    double * dXTemp= new double [n];
+    double * dYTemp= new double [n];
+    dXTemp=dx;
+    dYTemp=dy;
+
+    for(int i=1;i<=ex;i++)
+    {
+
+        for(int j=1;j<=ex;j++)
+        {
+            Em[i][j]=RelatePow(dXTemp,n,i+j-2);
+        }
+        Em[i][ex+1]=RelateMutiXY(dXTemp,dYTemp,n,i-1);
+    }
+    Em[1][1]=n;
+    CalEquation(ex,coefficient);
+
+}
 
 
 //求解方程
@@ -156,6 +167,79 @@ double F(double c[],int l,int m)//供CalEquation函数调用
 }
 
 
+- (void)test{
+    //double sum(double * dNumarry,int n)
+    //{
+    //    double *dTemp= new double[n];
+    //
+    //    double dSum=0;
+    //
+    //    dTemp=dNumarry;
+    //    for (int i=0;i<n;i++)
+    //    {
+    //        dSum+=dTemp[i];
+    //    }
+    //
+    //    return dSum;
+    //}
+    
+    //- (double)sumWithArr:(NSArray *)arr count:(int)count {
+    //
+    //    if (arr.count < count) {
+    //        NSLog(@"count 错误");
+    //    }
+    //    double sum = 0;
+    //    for (int i=0;i<count;i++)
+    //    {
+    //        NSNumber *num = arr[i];
+    //        sum+= num.doubleValue;
+    //    }
+    //    return sum;
+    //}
+    //
+    //- (double)mutilSumArr1:(NSArray *)arr1 arr2:(NSArray *)arr2 count:(int)count {
+    //
+    //    if (arr1.count < count || arr2.count < count) {
+    //        NSLog(@"count 错误");
+    //    }
+    //    double sum = 0;
+    //    for (int i=0;i<count;i++)
+    //    {
+    //        NSNumber *num1 = arr1[i];
+    //        NSNumber *num2 = arr2[i];
+    //        sum+= num1.doubleValue * num2.doubleValue;
+    //    }
+    //    return sum;
+    //}
+    //
+    //- (double)RelatePowWithArr:(NSArray *)arr count:(int)count power:(int)power {
+    //    if (arr.count < count) {
+    //        NSLog(@"count 错误");
+    //    }
+    //    double sum = 0;
+    //    for (int i=0;i<count;i++)
+    //    {
+    //        NSNumber *num = arr[i];
+    //        sum+= pow(num.doubleValue,power);
+    //    }
+    //    return sum;
+    //}
+    //
+    //- (double)RelateMutiArr1:(NSArray *)arr1 arr2:(NSArray *)arr2 count:(int)count power:(int)power {
+    //    if (arr1.count < count || arr2.count < count) {
+    //        NSLog(@"count 错误");
+    //    }
+    //    
+    //    double sum = 0;
+    //    for (int i=0;i<count;i++)
+    //    {
+    //        NSNumber *num1 = arr1[i];
+    //        NSNumber *num2 = arr2[i];
+    //        sum+= pow(num1.doubleValue, power) * num2.doubleValue;
+    //    }
+    //    return sum;
+    //}
 
+}
 
 @end
