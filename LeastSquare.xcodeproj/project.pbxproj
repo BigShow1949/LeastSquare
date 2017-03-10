@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1800954E1E7280C00050E672 /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1800954D1E7280C00050E672 /* MyView.m */; };
+		180095511E7280E60050E672 /* LeastSquare.mm in Sources */ = {isa = PBXBuildFile; fileRef = 180095501E7280E60050E672 /* LeastSquare.mm */; };
+		180095541E7281D90050E672 /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 180095531E7281D90050E672 /* Line.m */; };
 		183280701E715E770090110C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832806F1E715E770090110C /* main.m */; };
 		183280731E715E770090110C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 183280721E715E770090110C /* AppDelegate.m */; };
 		183280761E715E770090110C /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 183280751E715E770090110C /* ViewController.mm */; };
@@ -16,6 +19,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1800954C1E7280C00050E672 /* MyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
+		1800954D1E7280C00050E672 /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
+		1800954F1E7280E60050E672 /* LeastSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeastSquare.h; sourceTree = "<group>"; };
+		180095501E7280E60050E672 /* LeastSquare.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeastSquare.mm; sourceTree = "<group>"; };
+		180095521E7281D90050E672 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		180095531E7281D90050E672 /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 		1832806B1E715E770090110C /* LeastSquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeastSquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1832806F1E715E770090110C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		183280711E715E770090110C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -59,9 +68,15 @@
 			isa = PBXGroup;
 			children = (
 				183280711E715E770090110C /* AppDelegate.h */,
+				180095521E7281D90050E672 /* Line.h */,
+				180095531E7281D90050E672 /* Line.m */,
 				183280721E715E770090110C /* AppDelegate.m */,
+				1800954C1E7280C00050E672 /* MyView.h */,
+				1800954D1E7280C00050E672 /* MyView.m */,
 				183280741E715E770090110C /* ViewController.h */,
 				183280751E715E770090110C /* ViewController.mm */,
+				1800954F1E7280E60050E672 /* LeastSquare.h */,
+				180095501E7280E60050E672 /* LeastSquare.mm */,
 				183280771E715E770090110C /* Main.storyboard */,
 				1832807A1E715E770090110C /* Assets.xcassets */,
 				1832807C1E715E770090110C /* LaunchScreen.storyboard */,
@@ -151,9 +166,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1800954E1E7280C00050E672 /* MyView.m in Sources */,
+				180095541E7281D90050E672 /* Line.m in Sources */,
 				183280761E715E770090110C /* ViewController.mm in Sources */,
 				183280731E715E770090110C /* AppDelegate.m in Sources */,
 				183280701E715E770090110C /* main.m in Sources */,
+				180095511E7280E60050E672 /* LeastSquare.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +328,7 @@
 				183280841E715E770090110C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
